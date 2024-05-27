@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.jwt.example.dao.SaleRepository;
+import com.jwt.example.exception.MinorShoppingLimitException;
 import com.jwt.example.model.Sale;
 
 
@@ -17,8 +18,10 @@ public class SaleService {
 
     public Sale saveSale(Sale sale) {
        
+    	System.out.println("sale is "+sale);
         if (sale.isMinor() && sale.getPayAmount() > 1000) {
-            throw new IllegalArgumentException("Minors can only shop for up to Rs. 1000.");
+        	
+            throw new MinorShoppingLimitException("Minors can only shop for up to Rs. 1000.");
         }
         if (sale.getState().equals("Maharashtra")) {
             sale.setPayAmount(sale.getPayAmount() * 0.8); 
@@ -26,7 +29,7 @@ public class SaleService {
         return saleRepository.save(sale);
     }
 
-    public Page<Sale> getSales(int page, int size) {
+    public Page<Sale> getSales(int page, int size,String seachKey) {
         return saleRepository.findAll(PageRequest.of(page, size));
     }
 

@@ -16,27 +16,27 @@ import com.jwt.example.model.Sale;
 import com.jwt.example.service.SaleService;
 
 @RestController
-@RequestMapping("/api/sales")
 public class SaleController {
     @Autowired
     private SaleService saleService;
 
-    @PostMapping
+    @PostMapping("/createSale")
     public Sale createSale(@RequestBody Sale sale) {
         return saleService.saveSale(sale);
+        
     }
 
-    @GetMapping
-    public Page<Sale> getSales(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
-        return saleService.getSales(page, size);
+    @GetMapping("/getSales")
+    public Page<Sale> getSales(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,@RequestParam(defaultValue = "") String searchKey) {
+        return saleService.getSales(page, size ,searchKey);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteSale/{id}")
     public void deleteSale(@PathVariable Long id) {
         saleService.deleteSale(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateSale/{id}")
     public Sale updateSale(@PathVariable Long id, @RequestBody Sale saleDetails) {
         return saleService.updateSale(id, saleDetails);
     }

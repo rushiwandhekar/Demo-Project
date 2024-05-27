@@ -19,7 +19,7 @@ public class Sale {
 	private long id;
 	
 	
-	private Item item;
+	private String item;
 	
 	private Date shopDate;
 	
@@ -39,10 +39,10 @@ public long getId() {
 public void setId(long id) {
 	this.id = id;
 }
-public Item getItem() {
+public String getItem() {
 	return item;
 }
-public void setItem(Item item) {
+public void setItem(String item) {
 	this.item = item;
 }
 public Date getShopDate() {
@@ -111,7 +111,7 @@ public String getEmailId() {
 public void setEmailId(String emailId) {
 	this.emailId = emailId;
 }
-public Sale(long id, Item item, Date shopDate, String mobileNo, String customerName, String address, String state,
+public Sale(long id, String item, Date shopDate, String mobileNo, String customerName, String address, String state,
 		Date dateOfBirth, boolean minor, int quantity, double price, double payAmount, String emailId) {
 	super();
 	this.id = id;
